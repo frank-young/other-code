@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+	<style>
+	
+	.f-input-self{
+		position: relative;
+		/*width: 100px;*/
+	}
+	input[type='file']{
+		opacity: 0;
+		position: relative;
+		top: -28px;
+		cursor: pointer;
+		width: 120px;
+	}
+	.f-btn{
+		width: 100px;
+		height: 34px;
+		overflow: hidden;
+	}
+</style>
+</head>
+<body>
+
+<div class="row">
+	<div class="col-md-4 col-md-offset-3">
+		<div class="input-group f-input-self">
+			
+		<div id="text-view" type="text" class="form-control" placeholder=""></div>
+		  	<div class="input-group-btn">
+		  		<button class="btn btn-success f-btn">
+		  			浏览
+		  			<input type="file" class="form-control"  id="file" onchange= "readAsDataURL()" >
+		  		</button>
+			</div>
+		</div>
+	</div>
+	<!-- /.col-md-6 -->
+</div>
+<!-- /.row -->
+<div id="result"><img id="img-view" width="200" src="" alt=""></div>
+
+	<script>
+   	
+   	function g(id) {
+   		return document.getElementById(id); 
+   	}
+    // 将文件以Data URL形式进行读入页面
+    function readAsDataURL(){
+	    if(typeof FileReader == 'undefined') {
+	        alert("抱歉，你的浏览器无法预览图片");
+	    }
+        // 检查是否为图像类型
+        var simpleFile = document.getElementById("file").files[0];
+        var rFilter = /^(?:image\/bmp|image\/cis\-cod|image\/gif|image\/ief|image\/jpeg|image\/jpeg|image\/jpeg|image\/pipeg|image\/png|image\/svg\+xml|image\/tiff|image\/x\-cmu\-raster|image\/x\-cmx|image\/x\-icon|image\/x\-portable\-anymap|image\/x\-portable\-bitmap|image\/x\-portable\-graymap|image\/x\-portable\-pixmap|image\/x\-rgb|image\/x\-xbitmap|image\/x\-xpixmap|image\/x\-xwindowdump)$/i;
+        
+        if(!rFilter.test(simpleFile.type)) {
+            alert("请确保文件类型为图像类型");
+            return false;
+        }
+        g('text-view').innerHTML=simpleFile.name;	//模拟显示出文件名
+        var reader = new FileReader();
+        // 将文件以Data URL形式进行读入页面
+        reader.readAsDataURL(simpleFile);
+        reader.onload = function(e){
+           	g('img-view').src = this.result;
+        }
+    }
+</script>
+</body>
+</html>
