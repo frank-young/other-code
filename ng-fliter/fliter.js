@@ -26,7 +26,7 @@ app.filter('time', function(){
 			}else if(date.getDate()!=nowdate.getDate()&&date.getDate()==nowdate.getDate()-3){
 			    content="3天前";
 			}else{
-				content = Y+M+D+h+m+s; 
+				content = Y+M+D; 
 			}
 		  	return content;
 		}
