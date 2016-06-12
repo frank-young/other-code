@@ -25,8 +25,10 @@ app.filter('time', function(){
 			    content="2天前";
 			}else if(date.getDate()!=nowdate.getDate()&&date.getDate()==nowdate.getDate()-3){
 			    content="3天前";
-			}else{
+			}else if(date.getFullYear()!=nowdate.getFullYear()){
 				content = Y+M+D; 
+			}else{
+				content = M+D; 
 			}
 		  	return content;
 		}
